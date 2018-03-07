@@ -149,9 +149,13 @@ class Inchoo_SocialConnect_FacebookController extends Inchoo_SocialConnect_Contr
                 );
             }
 
-            $birthday = $info->getBirthday();
-            $birthday = Mage::app()->getLocale()->date($birthday, null, null, false)
+            $birthday = null;
+            // birthday is empty if user denies the permission
+            if(!empty($info->getBirthday())) {
+                $birthday = $info->getBirthday();
+                $birthday = Mage::app()->getLocale()->date($birthday, "MM/dd/yyyy", null, false)
                 ->toString('yyyy-MM-dd');
+            }
 
             $gender = $info->getGender();
             if(empty($gender)) {
