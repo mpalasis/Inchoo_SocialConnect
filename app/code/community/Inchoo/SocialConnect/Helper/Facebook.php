@@ -81,6 +81,7 @@ class Inchoo_SocialConnect_Helper_Facebook extends Mage_Core_Helper_Abstract
             $customer->setGender($gender);
         }
 
+        $customer->save();
         $customer->setConfirmation(null);
         $customer->save();
 
