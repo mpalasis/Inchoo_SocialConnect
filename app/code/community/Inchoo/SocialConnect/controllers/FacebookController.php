@@ -114,7 +114,14 @@ class Inchoo_SocialConnect_FacebookController extends Inchoo_SocialConnect_Contr
                 return $this;
             }
 
-            $customersByEmail = $helper->getCustomersByEmail($info->getEmail());
+            $email = $info->getEmail();
+            if(empty($email)) {
+                throw new Exception(
+                    $this->__('Sorry, could not retrieve your Facebook email address. Please try again.')
+                );
+            }
+
+            $customersByEmail = $helper->getCustomersByEmail($email);
 
             if($customersByEmail->getSize()) {
                 // Email account already exists - attach, login
